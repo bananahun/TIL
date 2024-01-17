@@ -123,3 +123,4 @@ def local():
     global_var +=3
 local()
 print(global_var)
+
