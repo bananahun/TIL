@@ -1,5 +1,5 @@
 import requests
-import pprint
+from pprint import pprint as print
 
 API_BASE_URL = 'https://jsonplaceholder.typicode.com/users/'
 
@@ -39,17 +39,35 @@ def create_user(dummy_data):
         censored_user_list[dummy_dict['company']]= [dummy_dict['name']]
     return censored_user_list
 
+
+def censorship(company_name):
+    if company_name in black_list:
+        # create_user(dummy_data)[company_name]만 하면 value값이 list에 감싸져서 나옴 ex) ['정훈'] 이런느낌
+        # 그래서 create_user(dummy_data)[company_name][0]으로 list의 값을 뽑아줘야함 ex) 정훈
+        print(f'{company_name}소속의 {create_user(dummy_data)[company_name][0]} 은/는 등록할 수 없습니다.')
+        return False
+    else:
+        # censorship이 함수의 return 값을 가지고 list에 넣어야함
+        # censored_user_list[company_name]= create_user(dummy_data)[company_name][0]
+        print('이상 없습니다.')
+        return True
+
 censored_user_list = {}
 for company_name in create_user(dummy_data):
-    if company_name in black_list:
-        print(f'{company_name}소속의 {create_user(dummy_data)[company_name]} 은/는 등록할 수 없습니다.')
-    else:
-        censored_user_list[company_name]= create_user(dummy_data)[company_name]
-        print('이상 없습니다.')
+    if censorship(company_name):
+        censored_user_list[company_name] = create_user(dummy_data)[company_name][0]
         
+    # if company_name in black_list:
+    #     print(f'{company_name}소속의 {create_user(dummy_data)[company_name]} 은/는 등록할 수 없습니다.')
+    # else:
+    #     censored_user_list[company_name]= create_user(dummy_data)[company_name]
+    #     print('이상 없습니다.')
+        
+# 리스트에 제대로 들어갔는데 출력 순서가 다름 이게 문제인데 어떻게 해결할거?
 print(censored_user_list)
 
-def censorship():
-    pass
+# def censorship():
+#     pass
+
 
 
