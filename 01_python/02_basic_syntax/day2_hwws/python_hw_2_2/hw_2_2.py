@@ -5,6 +5,6 @@ print(guide)
 print(int(cdbook) * total)
 
 changes = '그 중, 대여중인 책을 제외한 책의 수는 다음과 같습니다.'
-rental = 3.0
+rental = 3
 print(changes)
 print(total - int(rental))

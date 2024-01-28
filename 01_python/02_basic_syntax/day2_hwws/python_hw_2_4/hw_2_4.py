@@ -30,3 +30,13 @@ authors = [
     '임제',
 ]
 print(set(authors))
+
+new_list = []
+for name in authors:
+    for new_name in new_list:
+        if name != new_name:
+            new_list.append(name)
+        else:
+            pass
+        
+print (new_list)
