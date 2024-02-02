@@ -1,8 +1,8 @@
-import sys
-sys.stdin = open('input.txt')
-
-T = int(input())
-
+# import sys
+# sys.stdin = open('input.txt')
+#
+# T = int(input())
+#
 # for tc in range(T):
 #     line = int(input())
 #     for l in range(line):

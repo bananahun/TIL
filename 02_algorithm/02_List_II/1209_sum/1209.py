@@ -1,14 +1,31 @@
 import sys
 sys.stdin = open('input.txt')
 
-T = int(input())
-
-for tc in range(1, T+1):
+for tc in range(1, 11):
+    T = int(input())
     arr = [list(map(int, input().split())) for _ in range(100)]
-    new_list = []
+    lst = []
     for i in range(100):
-        sum_list = []
+        tmp = 0
         for j in range(100):
-            sum_list.append(arr[i][j])
-        new_list.append(sum_list)
-    print(max(new_list))
+            tmp += arr[i][j]
+        lst.append(tmp)
+    for j in range(100):
+        tmp = 0
+        for i in range(100):
+            tmp += arr[i][j]
+        lst.append(tmp)
+
+    tmp = 0
+    for i in range(100):
+        tmp += arr[i][i]
+    lst.append(tmp)
+
+    tmp = 0
+    for i in range(100):
+        tmp += arr[99-i][i]
+    lst.append(tmp)
+    print(f'#{T} {max(lst)} ')
+
+
+
