@@ -28,12 +28,28 @@
 # i=int(input())
 # print(S[i-1])
 
-def Bubble_Sort(my_list):
-    a = my_list
-    N = len(my_list)
-    for i in range(N-1,0,-1):
-        for j in range(0,i):
-            if a[j] > a[j+1]:
-                a[j],a[j+1] = a[j+1],a[j]
-    return my_list
+# def Bubble_Sort(my_list):
+#     a = my_list
+#     N = len(my_list)
+#     for i in range(N-1,0,-1):
+#         for j in range(0,i):
+#             if a[j] > a[j+1]:
+#                 a[j],a[j+1] = a[j+1],a[j]
+#     return my_list
 
+def push(item, size):
+    global top
+    top += 1
+    if top == size:
+        print('overflow!')
+    else:
+        stack[top] = item
+
+
+size = 10
+stack = [0] * size
+top = -1
+
+push(10, size)
+top += 1
+stack[top] = 20
