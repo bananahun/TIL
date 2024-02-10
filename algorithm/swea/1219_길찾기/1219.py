@@ -1,13 +1,21 @@
 import sys
 
-sys.stdin = open('input (10).txt')
+sys.stdin = open('input.txt')
 
 for _ in range(10):
     tc, num = map(int, input().split())
-    arr = list(input().split())
-    # 인접리스트
-    adjl = [[] for _ in range(99+1)] #
-    for range
+    arr = list(map(int,input().split()))
+    lst_1 = []
+    lst_2 = []
+    for idx in range(len(arr)):
+        if idx % 2 == 0:
+            lst_1.append(arr[idx])
+        else:
+            lst_2.append(arr[idx])
+    # print(lst_1)
+    # print(lst_2)
+    
+
 
 
 
