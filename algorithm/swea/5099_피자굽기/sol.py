@@ -11,6 +11,7 @@ for tc in range(1, T + 1):
     for i in range(len(pizza)):
         # [피자번호, 피자위의 치즈]
         pizza[i] = [i+1, pizza[i]]
+    # 대기중인 피자들 입니다
     pizza = deque(pizza)
     hd = deque([pizza.popleft()])
     # 치즈가 다 녹은 피자는 여기에 놓을거예요
