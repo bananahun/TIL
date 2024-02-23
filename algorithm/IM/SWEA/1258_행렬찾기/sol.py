@@ -2,39 +2,49 @@ import sys
 
 sys.stdin = open('input.txt')
 
-from collections import deque
 
+def bomb(sibal):
+    cnt = 0
+    dx = [0, 1, 0, -1] # 오른쪽 아래 왼쪽 위
+    dy = [1, 0, -1, 0] # 우 하 좌 상
+    for i in range(N):
+        for j in range(N):
+            if visited[i][j] == 0 and sibal[i][j] != 0:
+                cnt += 1
 
-def dfs(i, j):
-    global visited
-    dq = deque([(i, j)])
-    while dq:
-        x, y = dq.pop()
-        visited[x][y] = 1
-        for num in range(4):
-            dx = [0, 0, -1, 1]
-            dy = [-1, 1, 0, 0]
-            x += dx[num]
-            y += dy[num]
-            if lst[x][y] and 0 <= x < n and 0 <= y < n and visited[x][y] != 0:
-                visited[x][y] = 1
-                return dfs(x, y)
-            else:
-                x -= dx[num]
-                y -= dx[num]
-                break
+                stack = [(i, j)]
+                stackkk = [(i, j)]
+                visited[i][j] = 1
+                while stack:
+                    nx, ny = stack.pop()
+                    for k in range(4):
+                        cx = nx + dx[k]
+                        cy = ny + dy[k]
+
+                        if 0 <= cx < N and 0 <= cy < N and visited[cx][cy] == 0 and sibal[cx][cy] != 0:
+                            stack.append((cx, cy))
+                            stackkk.append((cx, cy))
+                            visited[cx][cy] = 1
+                stackkk.sort()
+                check = [0]
+                garo = 1
+                for a, b in stackkk:
+                    check.append(b)
+                try:
+                    if check.pop() == check.pop():
+                        garo += 1
+                except IndexError:
+                    garo = 1
+                print('넓이다임마', len(stackkk))
+                print('가로', garo)
+
+    return cnt
 
 
 T = int(input())
-for tc in range(1, T + 1):
-    n = int(input())
-    lst = [list(map(int, input().split())) for _ in range(n)]
-    # print(lst)
-    visited = [[0] * n for _ in range(n)]
-    cnt = 0
-    for i in range(n):
-        for j in range(n):
-            if lst[i][j] != 0 and visited[i][j] == 0:
-                dfs(i, j)
-                cnt += 1
-    print(cnt)
+for tc in range(1, 11):
+    N = int(input())
+    lst = [list(map(int, input().split())) for _ in range(N)]
+    visited = [[0] * N for _ in range(N)]
+    # print(visited)
+    print(bomb(lst))
