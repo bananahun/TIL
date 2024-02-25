@@ -53,7 +53,7 @@ for tc in range(1, T+1):
 
     print(new_lst)
 
-    for w in range(0, N - 2):
+    for w in range(0, N - 2): 
         for b in range(1, N - w - 1):
             r = N - w - b - 2
 
