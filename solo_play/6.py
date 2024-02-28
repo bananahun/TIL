@@ -1,55 +1,18 @@
-# a,b = input('').split()
-# a = int(a)
-# b = int(b)
-# if a<b:
-#     print('<')
-# elif a>b:
-#     print('>')
-# else:
-#     print('==')
+def KFC(x):
+    if x == 6:
+        return
 
-# num = int(input())
-# for num in range(1,num+1):
-#     print('*'*num)
+    print(x, end = ' ')
+    KFC(x + 1)
+    print(x, end = ' ')
 
-# a,b,c,d,e = input('').split()
-# a = float(a)
-# b = float(b)
-# c = float(c)
-# d = float(d)
-# e = float(e)
-# print(int((a**2+b**2+c**2+d**2+e**2)%10))
-
-# num = int(input())
-# for n in range(1,10):
-#     print(f'{num} * {n} = {num*n}')
-
-# S=str(input())
-# i=int(input())
-# print(S[i-1])
-
-# def Bubble_Sort(my_list):
-#     a = my_list
-#     N = len(my_list)
-#     for i in range(N-1,0,-1):
-#         for j in range(0,i):
-#             if a[j] > a[j+1]:
-#                 a[j],a[j+1] = a[j+1],a[j]
-#     return my_list
-
-def push(item, size):
-    global top
-    top += 1
-    if top == size:
-        print('overflow!')
-    else:
-        stack[top] = item
+KFC(0)
 
 
-size = 10
-stack = [0] * size
-top = -1
+def KFC(X):
+    if X == 3:
+        return
+    KFC(X + 1)
+    KFC(X + 1)
 
-push(10, size)
-top += 1
-stack[top] = 20
+KFC(0)
