@@ -47,15 +47,15 @@ for tc in range(1, T+1):
         w = M - ccc.count('W')      # 허연거 바꿀때 몇개
         b = M - ccc.count('B')      # 퍼런거 바꿀때 몇개
         r = M - ccc.count('R')      # 뻘건거 바꿀때 몇개
-        new_lst.append([w, b, r])
+        new_lst.append([w, b, r])   # 각 줄의 흰, 파, 빨
 
     answer = 1e9
 
     print(new_lst)
 
-    for w in range(0, N - 2): 
-        for b in range(1, N - w - 1):
-            r = N - w - b - 2
+    for w in range(0, N - 2):           # 흰색오는 경우
+        for b in range(1, N - w - 1):   # 파란색 오는 경우
+            r = N - w - b - 2           # 빨간색 오는 경우
 
             cnt = 0
             for i in range(w):
