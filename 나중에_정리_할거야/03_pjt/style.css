@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+KR:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: rgb(219, 235, 253);
+}
+.navbar {
+  background-color: #007bff; /* 파란색 계열의 네비게이션 바 */
+}
+.nav-link {
+  color: #ffffff !important; /* 흰색 텍스트 */
+}
+.card-title {
+  padding: 1rem;
+}
+.card-body2 {
+  display: flex;
+}
+.card-p{
+  font-size:large;
+}
