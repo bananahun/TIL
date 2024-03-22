@@ -1,9 +1,31 @@
+# N = int(input())
+
+# if N%2 == 0:
+#     print('CY')
+# else:
+#     print('SK')
+
 N = int(input())
 
-if N%2 == 0:
+lst = [False] * (N+1)
+lst[1] = 0 #sk
+lst[2] = 1 #cy
+lst[3] = 0
+
+for n in range(3, N+1):
+    if lst[n-1] == 0 or lst[n-3] == 0:
+        lst[n] = 1
+    else:
+        lst[n] == 0
+if lst[N] == 1:
     print('CY')
-else:
+elif lst[N] == 0:
     print('SK')
+
+
+
+
+
 
 #상영이가 항상 먼저 돌을 가져간다.
 #돌은 항상 1개 또는 3개를 가져간다.
