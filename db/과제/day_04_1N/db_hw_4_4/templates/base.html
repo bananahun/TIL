@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    {% if user.is_authenticated %}
+      <p><h2>Hello, {{ user.username }}</h2></p>
+        <form action="{% url 'accounts:logout' %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="로그아웃">
+        </form>
+    {% else %}
+        <a href="{% url 'accounts:login' %}">로그인</a>
+    {% endif %}
+  </ul>
+
+  {% block content %}
+  {% endblock content %}
+</body>
+</html>
