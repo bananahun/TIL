@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .done {
+      text-decoration: line-through;
+    }
+
+    .detail {
+      position: fixed;
+      top: 30%;
+      left: 70%;
+      border: 1px solid black;
+      width: 300px;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <article>
+      <div
+      v-for="todo in todos"
+      v-bind:key="todo.id"
+      >
+        <div clss="card" v-on:click="goDetail(todo)">
+          <p v-bind:class="{ done:todo.completed }">
+            {{ todo.title }}
+          </p>
+          <p>{{ todo.completed }}</p>
+          <hr>
+        </div>
+      </div>
+    </article>
+
+    <!-- 
+      v-if => 조건 불만족시 화면에 랜더링 조차 되지 않음
+      v-show => 조건 불만족시 display:none 으로 설정하고 랜더링함.
+     -->
+    <section v-if="todo" class="detail">
+      <!-- 종료버튼 -->
+      <button @click="closeDetail">x</button>
+      <h1>{{todo.id}} | {{todo.title}}</h1>
+      <p>userId : {{todo.userId}}</p>
+      <p>isCompleted : {{todo.completed}}</p>
+
+      <!-- 댓글 영역 -->
+      <div>
+        <p>댓글 본문</p>
+      </div>
+    </section>
+  </div>
+  <!-- vue cdn -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- axios cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <script>
+    // vue 가 가지고 있는 메서드 onMounted 를 가져온다 
+    const { createApp, ref, onMounted } = Vue
+    
+    const app = createApp({
+      setup() {
+        const todos = ref([
+          {
+            id:1,
+            title:'첫번째 게시글',
+            completed:false,
+          },
+          {
+            id:2,
+            title:'두번째 게시글',
+            completed:true,
+          },
+          
+        ])
+
+        const todo =ref(false)
+
+        const goDetail = function(item) {
+          todo.value = item
+        }
+
+        const closeDetail = function() {
+          todo.value = false
+        }
+        // onMounted 함수 호출시 , callback function
+        onMounted(() => {
+          axios({
+            methods:'get',
+            url:'https://jsonplaceholder.typicode.com/todos/'
+          })
+            .then(res => todos.value=res.data.slice(0,100))
+            .catch(res => console.log(res))
+        })
+        
+        return {
+          todos,
+          todo,
+          goDetail,
+          closeDetail,
+        }
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+</html>
