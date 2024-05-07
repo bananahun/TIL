@@ -23,6 +23,14 @@
         const count = ref(0)
         const message = ref(null)
 
+        onMounted(() => {
+          console.log('mounted')
+        })
+
+        onUpdated(() => {
+          message.value = 'count가 수정됨!!'
+        })
+
         return {
           count,
           message

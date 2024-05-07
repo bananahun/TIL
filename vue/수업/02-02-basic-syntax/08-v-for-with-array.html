@@ -12,7 +12,8 @@
     <!-- 필터링/정렬 결과 표시하기 -->
     <!-- 1. computed 활용 -->
     <ul>
-      <li>
+      <li v-for="num in evenNumbers">
+        {{ num }}
       </li>
     </ul>
 
@@ -20,7 +21,8 @@
 
     <!-- 2. method (computed가 불가능한 중첩된 v-for 경우) -->
     <ul v-for="numbers in numberSets">
-      <li>
+      <li v-for="num in evenNumberSets(numbers)">
+        {{ num }}
       </li>
     </ul>
   </div>
@@ -37,18 +39,18 @@
           [6, 7, 8, 9, 10]
         ])
 
-        // const evenNumbers = computed(() => {
-        //   return numbers.value.filter((number) => number % 2 === 0)
-        // })
+        const evenNumbers = computed(() => {
+          return numbers.value.filter((number) => number % 2 === 0)
+        })
 
-        // const evenNumberSets = function (numbers) {
-        //   return numbers.filter((number) => number % 2 === 0)
-        // }
+        const evenNumberSets = function (numbers) {
+          return numbers.filter((number) => number % 2 === 0)
+        }
 
         return {
           numberSets,
-          // evenNumbers,
-          // evenNumberSets
+          evenNumbers,
+          evenNumberSets
         }
       }
     })

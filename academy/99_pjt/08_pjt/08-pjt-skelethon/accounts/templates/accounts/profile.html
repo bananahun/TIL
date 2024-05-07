@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ person.username }}의 프로필 페이지</h1>
+  <div>
+    <div>
+      팔로잉 : <span id="followings-count">{{ person.followings.all|length }}</span> / 팔로워 : <span id="followers-count">{{ person.followers.all|length }}</span>
+    </div>
+    <form id="follow-form" data-user-id="{{ person.pk }}">
+      {% csrf_token %}
+      {% if request.user in person.followers.all %}
+        <input type="submit" value="언팔로우">
+      {% else %}
+        <input type="submit" value="팔로우">
+      {% endif %}
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.getElementById("follow-form")
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    form.addEventListener("submit", (event) => {
+      event.preventDefault()
+      const userId = event.target.dataset.userId
+      axios({
+        method: 'post',
+        url: `/accounts/${userId}/follow/`,
+        // url: `/accounts/{{ person.pk }}/follow/` 안됨? -> 여러개일때 안되지
+        headers: {'X-CSRFToken': csrftoken},
+      }).then((response) => {
+        // console.log(response.data.is_followed)
+        // console.log(response['data'])
+        const isFollowed = response.data.is_followed
+        const followBtn = document.querySelector('#follow-form > input[type=submit]')
+        if (isFollowed) {
+          // 팔로우o -> 언팔로우 버튼 뜨게
+          followBtn.value = '언팔로우'
+        } else {
+          // 팔로우x -> 팔로우 버튼 뜨게
+          followBtn.value = '팔로우'
+        }
+
+        const followingsCountTag = document.querySelector('#followings-count')   // span
+        const followersCountTag = document.querySelector('#followers-count')     // span
+
+        const followingsCountData = response.data.followings_count
+        const followersCountData = response.data.followers_count
+
+        // 선택한 span 태그의 내용을 팔로잉과 팔로워 수 데이터로 채워넣기
+        followingsCountTag.textContent = followingsCountData
+        followersCountTag.textContent = followersCountData
+      })
+    })
+  </script>
+ 
+{% endblock %}
