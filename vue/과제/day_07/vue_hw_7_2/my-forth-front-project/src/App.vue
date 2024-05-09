@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <h1>UserProfile</h1>
-  </div>
+<MainPage/>
 </template>
 
 <script setup>
-
+import MainPage from '@/components/MainPage.vue';
 </script>
+
 
 <style scoped>
 
