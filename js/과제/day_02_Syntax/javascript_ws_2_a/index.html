@@ -13,9 +13,9 @@
   </div>
 <body>
   <script>
-    const age = 20
-    const hasLicense = true
-    const isStudent = false
+    const age = 15
+    const hasLicense = false
+    const isStudent = true
 
     const ageP = document.querySelector('#age')
     const hasLicenseP = document.querySelector('#hasLicense')
@@ -26,7 +26,20 @@
     isStudentP.textContent = `isStudent : ${isStudent}`
 
     // 아래에 코드 작성
-    
+    if (age >= 17) {
+        if (hasLicense) {
+            console.log("운전 가능합니다.");
+        } else {
+            console.log("운전 면허증이 필요합니다.");
+        }
+    } 
+    else {
+        if (isStudent) {
+            console.log("운전 면허증을 취득할 수 없습니다.");
+        } else {
+            console.log("운전 자격 요건을 확인하세요.");
+        }
+    }
   </script>
 </body>
 
