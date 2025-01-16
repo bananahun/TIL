@@ -26,3 +26,4 @@ visit = [[0]*M for _ in range(N)]
 bfs(0, 0)
 
 print(visit[N-1][M-1])
+\\
